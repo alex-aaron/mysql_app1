@@ -18,3 +18,9 @@ connection.connect((err) => {
         console.log('XAMMP database connected');
     }
 });
+
+class Service {
+    static getServiceInstance() {
+        return instance ? instance : new Service();
+    }
+}
