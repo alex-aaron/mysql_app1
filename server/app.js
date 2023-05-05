@@ -13,11 +13,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // create
+app.post('/new', (req, res) => {
+  console.log(req);
+});
 
 
 // read
 app.get('/posts', (req, res) => {
-  res.json({ success: true });
+  const db = service.getServiceInstance(); 
+
+  const result = db.getPosts();
+
+  result
+  .then(data => res.json({data: data}))
+  .catch(err => console.log(err));
+
 })
 
 
