@@ -7,4 +7,19 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 })
 
+const postInputForm = document.getElementById('post-input-form');
+const titleInput = document.getElementById('title-input');
+const reviewInput = document.getElementById('review-input');
+const starInput = document.getElementById('star-input');
+const postInputBtn = document.getElementById('post-input-btn');
 
+postInputForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+})
+
+postInputBtn.addEventListener('click', () => {
+
+});
+
+function addPost()
