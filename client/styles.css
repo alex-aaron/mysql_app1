@@ -26,3 +26,8 @@ body {
 .post-title {
   font-family: title;
 }
+
+.card {
+  margin-top: 10px;
+
+}

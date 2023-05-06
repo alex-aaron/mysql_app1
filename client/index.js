@@ -34,39 +34,20 @@ function renderAllPosts(posts){
 }
 
 function createPostCard(post){
-  let rating = post.rating;
+  let rating = post.rating; // can remove this potentially
   let id = "posts-" + post.id;
   let card = document.createElement('div');
   card.className = "card";
   card.setAttribute('id', id);
 
-  let body = document.createElement('div');
-  body.className = 'card-body post-body text-white bg-info';
+  let body = createCardBody(post);
 
-  let title = document.createElement('h3');
-  title.className = 'card-title post-title';
-  title.innerHTML = post.title + " - " + rating + " Stars";
-
-  let hr = document.createElement('hr');
-
-  let review = document.createElement('p');
-  review.className = 'card-text review-text';
-  review.innerHTML = post.review;
-
-  let footer = document.createElement('div');
-  footer.className = 'card-footer';
-  footer.innerHTML = 'Comments';
-
-  body.append(title);
-  body.append(hr);
-  body.append(review);
+  let footer = createCardFooter();
 
   card.append(body);
   card.append(footer);
 
   posts.append(card);
-
 }
 
 
-// Helpers //
