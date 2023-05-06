@@ -14,7 +14,14 @@ app.use(express.urlencoded({ extended: false }));
 
 // create
 app.post('/new', (req, res) => {
-  console.log(req);
+  const { title, review, rating } = req.body;
+  const db = service.getServiceInstance();
+
+  const result = db.insertPost(title, review, rating);
+
+  result.then(data => res.json({ success: true }))
+  .catch(err => console.log(err));
+  
 });
 
 

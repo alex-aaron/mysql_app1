@@ -2,3 +2,27 @@ body {
   padding: 20px;
   background-image: url("./images/filmbg4.png");
 }
+
+#posts-container {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+
+@font-face {
+  font-family: title2;
+  src: url("./fonts/film-strip.otf");
+}
+
+@font-face {
+  font-family: title;
+  src: url("./fonts/Blockletter.otf");
+}
+
+#title {
+  font-family: title2;
+}
+
+.post-title {
+  font-family: title;
+}
