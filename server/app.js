@@ -21,8 +21,17 @@ app.post('/new', (req, res) => {
 
   result.then(data => res.json({ success: true }))
   .catch(err => console.log(err));
-  
 });
+
+app.post('/comments/new', (req, res) => {
+  const { text, entry_id } = req.body;
+  const db = service.getServiceInstance();
+
+  const result = db.insertComment(text, entry_id);
+
+  result.then(data => res.json({ success: true }))
+    .catch(err => console.log(err));
+})
 
 
 // read
@@ -35,6 +44,14 @@ app.get('/posts', (req, res) => {
   .then(data => res.json({data: data}))
   .catch(err => console.log(err));
 
+});
+
+app.get('/posts/:id/comments', (req, res) => {
+  // const db = service.getServiceInstance();
+
+  // create db service instance
+
+  // invoke method on service instance to get specific comments
 })
 
 

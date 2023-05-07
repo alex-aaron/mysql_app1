@@ -29,12 +29,44 @@ postInputForm.addEventListener('submit', (e) => {
   .then(response => response.json());
 });
 
+function postComment(event){
+  let postId = event.id.split("-")[1];
+  let textAreaId = "posts-" + postId + "-comment-input";
+  let comment = document.getElementById(textAreaId).value;
+  let fetchPath = 'http://localhost:5000/comments/new';
+
+  fetch(fetchPath, {
+    headers: {
+      'Content-type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({text: comment, entry_id: postId})
+  })
+  .then(response => response.json());
+}
+
 function renderAllPosts(posts){
   posts.forEach(post => createPostCard(post));
 }
 
+function fetchPostComments(target){
+  console.log('hit fetch post comments');
+  let postId = target.id.split("-")[1];
+  let fetchPath = "http://localhost:5000/posts/" + postId + "/comments";
+  console.log(fetchPath);
+  fetch(fetchPath)
+    .then(res => console.log(res.json()))
+    .then(data => {
+      console.log(data);
+    })
+}
+
+function renderComments(commenhts){
+  console.log('hit render comments');
+}
+
+
 function createPostCard(post){
-  let rating = post.rating; // can remove this potentially
   let id = "posts-" + post.id;
   let card = document.createElement('div');
   card.className = "card";
@@ -42,7 +74,7 @@ function createPostCard(post){
 
   let body = createCardBody(post);
 
-  let footer = createCardFooter();
+  let footer = createCardFooter(post);
 
   card.append(body);
   card.append(footer);

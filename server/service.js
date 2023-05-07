@@ -50,7 +50,7 @@ class Service {
             const dateAdded = new Date();
             const insertId = await new Promise((resolve, reject) => {
                 const query = 
-                "INSERT INTO entries (title, review, rating, date_added) VALUES (?, ?, ?,?);"
+                "INSERT INTO entries (title, review, rating, date_added) VALUES (?, ?, ?, ?);"
 
                 connection.query(query, [title, review, rating, dateAdded],
                     (err, results) => {
@@ -66,6 +66,29 @@ class Service {
             console.log(err);
         }
 
+    }
+
+    async getComments(){
+        
+    }
+
+    async insertComment(text, entryId){
+        try {
+            const insertId = await new Promise( (resolve, reject) => {
+                const query = "INSERT INTO comments (text, entry_id) VALUES (?, ?);";
+                
+                connection.query(query, [text, entryId], (err, results) => {
+                    if (err){
+                        reject(new Error(err.message));
+                    } else {
+                        resolve(results);
+                    }
+                })
+            });
+            return insertId;
+        } catch (error){
+            console.log(error);
+        }
     }
 }
 
