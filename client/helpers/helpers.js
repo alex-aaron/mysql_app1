@@ -23,7 +23,8 @@ function createCardFooter(postObj){
     footer.setAttribute('id', id);
     footer.className = 'card-footer';
 
-    let row = createFooterRow(postObj);
+    let seeComments = createCommentsButton(postObj);
+    let addComments = createAddCommentButton(postObj);
     let form = createCommentForm(postObj);
 
     let commentsDiv = document.createElement('div');
@@ -31,16 +32,16 @@ function createCardFooter(postObj){
     commentsDiv.className = 'collapse';
     commentsDiv.setAttribute('id', commentsDivId);
 
-    footer.append(row);
+    footer.append(seeComments);
+    footer.append(addComments);
     footer.append(form);
-    
     footer.append(commentsDiv);
 
     return footer;
 }
 
 function createCardRow(post){
-    let date = post.date_added.toString();
+    let date = moment(post.date_added).format('MMMM Do, YYYY h:mma');
     let ratingPath = getRatingPath(post);
 
     let row = document.createElement('div');
@@ -91,7 +92,7 @@ function getRatingPath(postObj) {
     let id = "posts-" + postObj.id + "-comments-btn";
     let dataTarget = "#posts-" + postObj.id + "-comments";
     btn.innerHTML = 'See Comments';
-    btn.className = "btn btn-primary";
+    btn.className = "btn btn-primary see-comments-button";
     btn.setAttribute('id', id);
     btn.setAttribute('data-toggle', "collapse");
     btn.setAttribute('data-target', dataTarget);
@@ -165,7 +166,7 @@ function getRatingPath(postObj) {
 
     let submit = document.createElement('button');
     submit.innerHTML = 'Submit';
-    submit.className = "btn btn-primary";
+    submit.className = "btn btn-primary comment-form-submit";
     submit.setAttribute('type', 'submit');
     submit.setAttribute('id', 'comment-form-submit');
 

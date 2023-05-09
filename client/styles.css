@@ -31,3 +31,15 @@ body {
   margin-top: 10px;
 
 }
+
+#test {
+  padding: 10px;
+}
+
+.see-comments-button {
+  margin-right: 2.5px;
+}
+
+.comment-form-submit {
+  margin-top: 4px;
+}

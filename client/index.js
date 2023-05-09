@@ -57,7 +57,6 @@ function fetchPostComments(target){
   fetch(fetchPath)
     .then(res => res.json())
     .then(data => {
-      // invoke method on data.data?
       renderComments(data.data);
     });
 }
@@ -76,8 +75,10 @@ function renderComments(comments){
 function createCommentCard(comment){
   let div = document.createElement('div');
   div.className = "card comment-card";
+
   let body = document.createElement('div');
   body.className = "card-body";
+
   let text = document.createElement('p');
   text.innerHTML = comment.text;
 

@@ -58,8 +58,7 @@ app.get('/posts/:id/comments', (req, res) => {
   .then(data => res.json({data: data}))
   .catch(err => console.log(err));
 
-  // invoke method on service instance to get specific comments
-})
+});
 
 
 // update
