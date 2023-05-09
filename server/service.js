@@ -38,7 +38,7 @@ class Service {
                     }
                 });
             });
-            console.log(response);
+            // console.log(response);
             return response;
         } catch (error){
             console.log(error);
@@ -68,8 +68,25 @@ class Service {
 
     }
 
-    async getComments(){
-        
+    async getComments(id){
+        try {
+            const response = await new Promise( (resolve, reject) => {
+                const query = 
+                "SELECT * FROM comments WHERE entry_id=?";
+
+                connection.query(query, [id], (err, results) => {
+                    if (err){
+                        reject(new Error(err.message));
+                    } else {
+                        resolve(results);
+                    }
+                });
+            });
+            console.log(response);
+            return response;
+        } catch (error){
+            console.log(error);
+        }
     }
 
     async insertComment(text, entryId){

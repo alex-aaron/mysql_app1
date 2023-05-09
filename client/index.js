@@ -55,16 +55,37 @@ function fetchPostComments(target){
   let fetchPath = "http://localhost:5000/posts/" + postId + "/comments";
   console.log(fetchPath);
   fetch(fetchPath)
-    .then(res => console.log(res.json()))
+    .then(res => res.json())
     .then(data => {
-      console.log(data);
-    })
+      // invoke method on data.data?
+      renderComments(data.data);
+    });
 }
 
-function renderComments(commenhts){
-  console.log('hit render comments');
+function renderComments(comments){
+  let postId = comments[0].entry_id;
+  let divId = "posts-" + postId + "-comments"; 
+  let div = document.getElementById(divId);
+  comments.forEach(comment => {
+    let card = createCommentCard(comment);
+    div.append(card);
+  });
+
 }
 
+function createCommentCard(comment){
+  let div = document.createElement('div');
+  div.className = "card comment-card";
+  let body = document.createElement('div');
+  body.className = "card-body";
+  let text = document.createElement('p');
+  text.innerHTML = comment.text;
+
+  body.append(text);
+  div.append(body);
+
+  return div;
+}
 
 function createPostCard(post){
   let id = "posts-" + post.id;

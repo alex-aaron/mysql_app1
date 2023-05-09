@@ -47,9 +47,16 @@ app.get('/posts', (req, res) => {
 });
 
 app.get('/posts/:id/comments', (req, res) => {
-  // const db = service.getServiceInstance();
+  console.log(req.body);
+  let postId = req.originalUrl.split("/")[2];
+  
+  const db = service.getServiceInstance();
 
-  // create db service instance
+  const result = db.getComments(postId);
+
+  result
+  .then(data => res.json({data: data}))
+  .catch(err => console.log(err));
 
   // invoke method on service instance to get specific comments
 })
