@@ -77,7 +77,6 @@ function createCommentForm(postObj){
     submit.setAttribute('id', submitId);
 
     submit.addEventListener('click', (e) => {
-        // invoke handleClick function
         e.preventDefault();
         handleEditComment(e.target);
     })

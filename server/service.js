@@ -100,9 +100,28 @@ class Service {
                     } else {
                         resolve(results);
                     }
-                })
+                });
             });
             return insertId;
+        } catch (error){
+            console.log(error);
+        }
+    }
+
+    async updateComment(commentId, editedText){
+        try {
+            const response = await new Promise( (resolve, reject) => {
+                const query = `UPDATE comments SET text = ? WHERE id = ?`;
+
+                connection.query(query, [editedText, commentId], (err, results) => {
+                    if (err){
+                        reject(new Error(err.message));
+                    } else {
+                        resolve(results);
+                    }
+                });
+            });
+            return response;
         } catch (error){
             console.log(error);
         }

@@ -62,6 +62,9 @@ function fetchPostComments(target){
 }
 
 function renderComments(comments){
+  if (comments.length === 0){
+    // create pop up?
+  }
   let postId = comments[0].entry_id;
   let divId = "posts-" + postId + "-comments"; 
   let div = document.getElementById(divId);
@@ -113,22 +116,37 @@ function createPostCard(post){
 }
 
 function handleEditComment(target){
+  console.log('hit handle edit comment function');
   let commentId = target.id.split("-")[1];
   let textId = "comments-" + commentId + "-edit-comment-input";
-  let edits = document.getElementById(textId);
+  let edits = document.getElementById(textId).value;
   let fetchPath = "http://localhost:5000/comments/" + commentId + "/edit";
   fetch(fetchPath, {
-    method: 'PATCH',
-    body: JSON.stringify({
-      id: commentId,
-      text: edits
-    })
+    headers: {
+      'Content-type': 'application/json',
+    },
+    method: "PATCH",
+    body: JSON.stringify({id: commentId, text: edits})
   }).then(response => response.json())
   .then(data => {
     if (data.success){
-      location.reload();
+      location.reload()
     }
-  })
+  });
+
+  // fetch(fetchPath, {
+  //   method: 'PATCH',
+  //   body: JSON.stringify({
+  //     id: commentId,
+  //     text: edits
+  //   })
+  // }).then(response => response.json())
+  // .then(data => {
+  //   if (data.success){
+  //     console.log(data.data);
+  //     // location.reload();
+  //   }
+  // })
 }
 
 

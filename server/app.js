@@ -47,7 +47,6 @@ app.get('/posts', (req, res) => {
 });
 
 app.get('/posts/:id/comments', (req, res) => {
-  console.log(req.body);
   let postId = req.originalUrl.split("/")[2];
   
   const db = service.getServiceInstance();
@@ -63,8 +62,14 @@ app.get('/posts/:id/comments', (req, res) => {
 
 // update
 app.patch('/comments/:id/edit', (req, res) => {
-
+  let { id, text } = req.body;
   const db = service.getServiceInstance();
+  
+  const result = db.updateComment(id, text);
+
+  result
+  .then(data => res.json({data:data}))
+  .catch(err => console.log(err));
 
 });
 
