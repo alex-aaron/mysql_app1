@@ -82,11 +82,19 @@ function createCommentCard(comment){
   let text = document.createElement('p');
   text.innerHTML = comment.text;
 
+  let edit = createEditCommentButton(comment);
+  let deleteComment = createDeleteCommentButton(comment);
+  let editForm = createCommentEditForm(comment);
+
   body.append(text);
+  body.append(edit);
+  body.append(deleteComment);
+  body.append(editForm);
   div.append(body);
 
   return div;
 }
+
 
 function createPostCard(post){
   let id = "posts-" + post.id;
@@ -102,6 +110,25 @@ function createPostCard(post){
   card.append(footer);
 
   posts.append(card);
+}
+
+function handleEditComment(target){
+  let commentId = target.id.split("-")[1];
+  let textId = "comments-" + commentId + "-edit-comment-input";
+  let edits = document.getElementById(textId);
+  let fetchPath = "http://localhost:5000/comments/" + commentId + "/edit";
+  fetch(fetchPath, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      id: commentId,
+      text: edits
+    })
+  }).then(response => response.json())
+  .then(data => {
+    if (data.success){
+      location.reload();
+    }
+  })
 }
 
 

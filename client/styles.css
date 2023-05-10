@@ -43,3 +43,15 @@ body {
 .comment-form-submit {
   margin-top: 4px;
 }
+
+.comment-edit-button {
+  margin-right: 2.5px;
+}
+
+.comment-edit-form-container {
+  margin-top: 5px;
+}
+
+.edit-comment-submit {
+  margin-top: 5px;
+}

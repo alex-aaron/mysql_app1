@@ -62,7 +62,11 @@ app.get('/posts/:id/comments', (req, res) => {
 
 
 // update
+app.patch('/comments/:id/edit', (req, res) => {
 
+  const db = service.getServiceInstance();
+
+});
 
 
 // delete
