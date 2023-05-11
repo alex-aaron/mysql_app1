@@ -57,22 +57,35 @@ function fetchPostComments(target){
   fetch(fetchPath)
     .then(res => res.json())
     .then(data => {
-      renderComments(data.data);
+      let comments = document.getElementById('posts-' + postId + "-comments" ).children;
+      if (comments.length === 0){
+        renderComments(data.data, postId);
+      }
     });
 }
 
-function renderComments(comments){
-  if (comments.length === 0){
-    // create pop up?
-  }
-  let postId = comments[0].entry_id;
+function renderComments(comments, postId){
+  console.log(comments);
   let divId = "posts-" + postId + "-comments"; 
   let div = document.getElementById(divId);
-  comments.forEach(comment => {
-    let card = createCommentCard(comment);
-    div.append(card);
-  });
-
+  if (comments.length > 0){
+    let element = document.getElementById("posts-" + postId + "-no-comments-div");
+    if (element){
+      element.remove();
+    }
+    comments.forEach(comment => {
+      let card = createCommentCard(comment);
+      div.append(card);
+    });
+  } else {
+    let noCommentsDiv = document.createElement('div');
+    let id = "posts-" + postId + "-no-comments-div";
+    noCommentsDiv.setAttribute('id', id);
+    noCommentsDiv.className = 'no-comments-div';
+    let p = document.createElement('p').innerHTML = 'This post has no comments';
+    noCommentsDiv.append(p);
+    div.append(noCommentsDiv);
+  }
 }
 
 function createCommentCard(comment){

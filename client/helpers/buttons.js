@@ -28,7 +28,11 @@ function createAddCommentButton(postObj){
     btn.setAttribute('data-target', dataTarget);
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      fetchPostComments(e.target);
+      let comments = document.getElementById('posts-' + postObj.id + "-comments");
+      console.log(comments.className); // collapse
+      if (comments.className !== 'collapse show'){
+        fetchPostComments(e.target);
+      }
     })
     return btn;
   }

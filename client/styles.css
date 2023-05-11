@@ -55,3 +55,7 @@ body {
 .edit-comment-submit {
   margin-top: 5px;
 }
+
+.no-comments-div {
+  margin-top: 4px;
+}
