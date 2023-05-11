@@ -75,7 +75,6 @@ function getRatingPath(postObj) {
     let path = './images/'
     let stars;
     let str = postObj.rating.toString();
-    console.log(str);
   
     if (!str.includes(".")) {
       stars = str[0] + "stars.png";

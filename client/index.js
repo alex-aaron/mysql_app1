@@ -146,20 +146,20 @@ function handleEditComment(target){
       location.reload()
     }
   });
+}
 
-  // fetch(fetchPath, {
-  //   method: 'PATCH',
-  //   body: JSON.stringify({
-  //     id: commentId,
-  //     text: edits
-  //   })
-  // }).then(response => response.json())
-  // .then(data => {
-  //   if (data.success){
-  //     console.log(data.data);
-  //     // location.reload();
-  //   }
-  // })
+function handleDeleteComment(id){
+  console.log('handle delete comment');
+  let fetchPath = "http://localhost:5000/comments/" + id + "/delete";
+  console.log(fetchPath);
+  fetch(fetchPath, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: "DELETE",
+    body: JSON.stringify({ id: id })
+  }).then(response => response.json())
+  .then(data => console.log(data));
 }
 
 

@@ -75,6 +75,12 @@ app.patch('/comments/:id/edit', (req, res) => {
 
 
 // delete
+app.delete('/comments/:id/delete', (req, res) => {
+  let commentId = req.body.id;
+
+  const db = service.getServiceInstance();
+  const result = db.deleteComment(commentId);
+});
 
 app.listen(process.env.PORT, () => {
   console.log('Server is running on port 5000')

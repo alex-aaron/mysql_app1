@@ -59,6 +59,10 @@ function createAddCommentButton(postObj){
     btn.setAttribute('id', id);
     btn.setAttribute('data-toggle', 'collapse');
     
+    btn.addEventListener('click', (e) => {
+      let commentId = e.target.id.split("-")[1];
+      handleDeleteComment(commentId);
+    })
   
     return btn;
   }

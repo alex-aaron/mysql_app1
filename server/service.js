@@ -126,6 +126,25 @@ class Service {
             console.log(error);
         }
     }
+
+    async deleteComment(id){
+        try {
+            const response = await new Promise( (resolve, reject) => {
+               const query = "DELETE FROM comments WHERE id = ?";
+               connection.query(query, [id], (err, results) => {
+                if (err){
+                    reject(new Error(err.message));
+                } else {
+                    resolve(results);
+                }
+               }); 
+            });
+            console.log(response);
+            return response;
+        } catch (error){
+            console.log(error);
+        }
+    }
 }
 
 module.exports = Service;
